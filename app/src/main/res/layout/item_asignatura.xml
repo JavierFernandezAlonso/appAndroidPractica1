@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/fondo_asignatura">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/textViewNombreAsignatura"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="@string/nombre_asignatura_ejemplo"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+        <Button
+            android:id="@+id/btnEliminarAsignatura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/eliminar_asignatura"
+            android:textSize="12sp"
+            android:minWidth="0dp"
+            android:minHeight="48dp"
+            android:backgroundTint="#9B4055"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textViewDescripcionAsignatura"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/profesor_sin_asignar"
+        android:textColor="#B8B8C8"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+</LinearLayout>

@@ -3,14 +3,14 @@ plugins {
 }
 
 android {
-    namespace = "com.example.appandroidpractica1"
+    namespace = "com.example.studyplan"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.example.appandroidpractica1"
-        minSdk = 33
+        applicationId = "com.example.studyplan"
+        minSdk = 24
         targetSdk = 37
         versionCode = 1
         versionName = "1.0"
@@ -36,6 +36,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.constraintlayout)
     implementation(libs.material)
+    implementation(libs.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)

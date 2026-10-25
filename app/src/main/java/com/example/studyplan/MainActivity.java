@@ -1,12 +1,15 @@
-package com.example.appandroidpractica1;
+package com.example.studyplan;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,4 +24,26 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    public void abrirAsignaturas(View view) {
+        Intent intent = new Intent(this, AsignaturasActivity.class);
+        startActivity(intent);
+    }
+
+    public void abrirTareas(View view) {
+
+        Toast.makeText(this, "Abriendo tareas pendientes", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void abrirHorarios(View view) {
+
+        Toast.makeText(this, "Abriendo horario de clases", Toast.LENGTH_SHORT).show();
+    }
+
+    public void abrirCalculadora(View view) {
+
+        Toast.makeText(this, "Abriendo calculadora de notas", Toast.LENGTH_SHORT).show();
+    }
+
 }

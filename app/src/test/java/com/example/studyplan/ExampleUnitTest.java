@@ -1,4 +1,4 @@
-package com.example.appandroidpractica1;
+package com.example.studyplan;
 
 import org.junit.Test;
 

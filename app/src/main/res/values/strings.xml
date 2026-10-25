@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">appAndroidPractica1</string>
+    <string name="app_name">StudyPlan</string>
+    <string name="studyplan">StudyPlan</string>
+    <string name="tu_organizador_de_estudios">Organiza tus estudios, alcanza tus metas</string>
+    <string name="mis_asignaturas">Mis asignaturas</string>
+    <string name="tareas_pendientes">Tareas pendientes</string>
+    <string name="horario_de_clases">Horario de clases</string>
+    <string name="calculadora_de_notas">Calculadora de notas</string>
+    <string name="mensaje_motivacion">Cada pequeño avance cuenta. ¡Sigue adelante!</string>
+    <string name="titulo_bienvenida">¡A por tus objetivos! ✨</string>
+    <string name="descripcion_bienvenida">Organiza tus asignaturas y mantén tus estudios al día</string>
+    <string name="organiza_y_consulta_tus_asignaturas">Organiza y consulta tus asignaturas</string>
+    <string name="a_adir_asignatura">Añadir Asignatura</string>
+    <string name="nombre_asignatura_ejemplo">Programación</string>
+    <string name="eliminar_asignatura">Eliminar</string>
+    <string name="profesor_sin_asignar">Profesor: Sin asignar</string>
 </resources>

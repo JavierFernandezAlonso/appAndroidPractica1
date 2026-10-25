@@ -22,6 +22,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "appAndroidPractica1"
+rootProject.name = "StudyPlan"
 include(":app")
- 
