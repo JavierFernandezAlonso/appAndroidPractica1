@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     public void abrirTareas(View view) {
 
         Toast.makeText(this, "Abriendo tareas pendientes", Toast.LENGTH_SHORT).show();
-
+        Intent intent = new Intent(this, TareasActivity.class);
+        startActivity(intent);
     }
 
     public void abrirHorarios(View view) {

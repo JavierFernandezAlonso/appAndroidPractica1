@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="16dp"
+    android:background="@drawable/bg_tarea">
+
+    <TextView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:background="@drawable/bg_icono_tarea"
+        android:text="▣"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTarea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Entregar práctica"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:maxLines="2" />
+
+        <TextView
+            android:id="@+id/tvAsignatura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Asignatura: Programación"
+            android:textColor="#A995E8"
+            android:textSize="14sp"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/tvFechaEntrega"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Entrega: 30/10/2026"
+            android:textColor="#BDB8D0"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnEliminar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bg_boton_eliminar"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="0dp"
+        android:text="×"
+        android:textColor="#A995E8"
+        android:textSize="25sp"
+        android:textAllCaps="false"
+        android:contentDescription="Eliminar tarea" />
+
+</LinearLayout>
+
