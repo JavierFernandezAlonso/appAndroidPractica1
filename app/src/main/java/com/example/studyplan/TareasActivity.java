@@ -11,12 +11,17 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 
 import java.util.ArrayList;
 
@@ -32,14 +37,49 @@ public class TareasActivity extends AppCompatActivity {
     private ArrayAdapter<String> adaptador;
 
     private ListView listaTareas;
-
-    private static final int REQUEST_NUEVA_TAREA = 1;
+    private ActivityResultLauncher<Intent> formularioLauncher;
+    private static final String TAG = "TareasActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tareas);
+
+        formularioLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                resultado -> {
+
+                    if (resultado.getResultCode() == RESULT_OK) {
+
+                        Intent data = resultado.getData();
+
+                        if (data != null) {
+
+                            String tarea = data.getStringExtra(
+                                    FormularioTareaActivity.EXTRA_TAREA);
+
+                            String asignatura = data.getStringExtra(
+                                    FormularioTareaActivity.EXTRA_ASIGNATURA);
+
+                            String fecha = data.getStringExtra(
+                                    FormularioTareaActivity.EXTRA_FECHA);
+
+                            if (tarea != null
+                                    && asignatura != null
+                                    && fecha != null) {
+
+                                tareas.add(tarea);
+                                asignaturas.add(asignatura);
+                                fechas.add("Entrega: " + fecha);
+
+                                guardarTareas();
+
+                                adaptador.notifyDataSetChanged();
+                            }
+                        }
+                    }
+                });
 
         ViewCompat.setOnApplyWindowInsetsListener(
                 findViewById(R.id.main), (v, insets) -> {
@@ -67,15 +107,16 @@ public class TareasActivity extends AppCompatActivity {
         // Recuperar las tareas guardadas en el dispositivo.
         cargarTareas();
 
-        adaptador = new ArrayAdapter<String>(
+        adaptador = new ArrayAdapter<>(
                 this,
                 R.layout.item_tarea,
                 R.id.tvTarea,
                 tareas
         ) {
             @Override
-            public View getView(int position, View convertView,
-                                ViewGroup parent) {
+            @NonNull
+            public View getView(int position, @Nullable View convertView,
+                                @NonNull ViewGroup parent) {
 
                 View vista = super.getView(
                         position, convertView, parent);
@@ -125,8 +166,7 @@ public class TareasActivity extends AppCompatActivity {
                     FormularioTareaActivity.class
             );
 
-            startActivityForResult(
-                    intent, REQUEST_NUEVA_TAREA);
+            formularioLauncher.launch(intent);
         });
     }
 
@@ -149,7 +189,7 @@ public class TareasActivity extends AppCompatActivity {
                 arrayTareas.put(objeto);
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG, "Error al guardar las tareas", e);
             }
         }
 
@@ -189,45 +229,11 @@ public class TareasActivity extends AppCompatActivity {
             }
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Error al recuperar las tareas", e);
 
             tareas.clear();
             asignaturas.clear();
             fechas.clear();
-        }
-    }
-
-    // Recibir una tarea nueva desde el formulario.
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_NUEVA_TAREA
-                && resultCode == RESULT_OK
-                && data != null) {
-
-            String tarea = data.getStringExtra(
-                    FormularioTareaActivity.EXTRA_TAREA);
-
-            String asignatura = data.getStringExtra(
-                    FormularioTareaActivity.EXTRA_ASIGNATURA);
-
-            String fecha = data.getStringExtra(
-                    FormularioTareaActivity.EXTRA_FECHA);
-
-            if (tarea != null
-                    && asignatura != null
-                    && fecha != null) {
-
-                tareas.add(tarea);
-                asignaturas.add(asignatura);
-                fechas.add("Entrega: " + fecha);
-
-                guardarTareas();
-
-                adaptador.notifyDataSetChanged();
-            }
         }
     }
 }

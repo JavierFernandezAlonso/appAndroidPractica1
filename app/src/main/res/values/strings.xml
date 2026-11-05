@@ -14,4 +14,21 @@
     <string name="nombre_asignatura_ejemplo">Programación</string>
     <string name="eliminar_asignatura">Eliminar</string>
     <string name="profesor_sin_asignar">Profesor: Sin asignar</string>
+    <string name="volver_inicio">Volver al inicio</string>
+    <string name="titulo_tareas">Tareas pendientes</string>
+    <string name="descripcion_tareas">Consulta tus próximas entregas</string>
+    <string name="anadir_tarea">＋  Añadir tarea</string>
+    <string name="titulo_formulario">Añadir tarea</string>
+    <string name="subtitulo_formulario">Introduce los datos de la tarea</string>
+    <string name="etiqueta_nombre_tarea">Nombre de la tarea</string>
+    <string name="hint_nombre_tarea">Ej. Entregar práctica</string>
+    <string name="etiqueta_asignatura">Asignatura</string>
+    <string name="hint_asignatura">Ej. Programación</string>
+    <string name="etiqueta_fecha">Fecha de entrega (DD/MM/AAAA)</string>
+    <string name="hint_fecha">Ej. 30/10/2026</string>
+    <string name="guardar_tarea">Guardar tarea</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="icono_tarea">▣</string>
+    <string name="simbolo_eliminar">×</string>
+    <string name="eliminar_tarea">Eliminar tarea</string>
 </resources>

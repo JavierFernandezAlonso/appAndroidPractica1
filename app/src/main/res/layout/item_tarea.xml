@@ -13,9 +13,10 @@
         android:layout_height="48dp"
         android:gravity="center"
         android:background="@drawable/bg_icono_tarea"
-        android:text="▣"
+        android:text="@string/icono_tarea"
         android:textColor="#FFFFFF"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:importantForAccessibility="no" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -28,18 +29,16 @@
             android:id="@+id/tvTarea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Entregar práctica"
             android:textColor="#FFFFFF"
             android:textSize="17sp"
             android:textStyle="bold"
-            android:maxLines="2" />
+            android:breakStrategy="high_quality" />
 
         <TextView
             android:id="@+id/tvAsignatura"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Asignatura: Programación"
             android:textColor="#A995E8"
             android:textSize="14sp"
             android:maxLines="1" />
@@ -49,25 +48,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Entrega: 30/10/2026"
             android:textColor="#BDB8D0"
             android:textSize="14sp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btnEliminar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/bg_boton_eliminar"
         android:minWidth="0dp"
         android:minHeight="0dp"
         android:padding="0dp"
-        android:text="×"
-        android:textColor="#A995E8"
+        android:text="@string/simbolo_eliminar"
+        android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:textAllCaps="false"
-        android:contentDescription="Eliminar tarea" />
+        android:contentDescription="@string/eliminar_tarea" />
 
 </LinearLayout>
 
