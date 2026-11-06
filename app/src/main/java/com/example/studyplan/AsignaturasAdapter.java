@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
+import android.widget.LinearLayout;
 
 public class AsignaturasAdapter extends RecyclerView.Adapter<AsignaturasAdapter.AsignaturaViewHolder> {
 
@@ -41,6 +42,59 @@ public class AsignaturasAdapter extends RecyclerView.Adapter<AsignaturasAdapter.
         Context context = holder.itemView.getContext();
         preferencias = context.getSharedPreferences("StudyPlan", Context.MODE_PRIVATE);
         holder.textViewNombreAsignatura.setText(listaAsignaturas.get(position));
+        holder.itemView.setOnClickListener(v -> {
+
+            int posicion = holder.getBindingAdapterPosition();
+
+            if (posicion == RecyclerView.NO_POSITION) {
+                return;
+            }
+
+            String nombreActual = listaAsignaturas.get(posicion);
+
+            EditText inputNombre = new EditText(context);
+            inputNombre.setHint("Nombre de la asignatura");
+            inputNombre.setSingleLine(true);
+            inputNombre.setText(nombreActual);
+
+            EditText inputProfesor = new EditText(context);
+            inputProfesor.setHint("Nombre del profesor");
+            inputProfesor.setSingleLine(true);
+            inputProfesor.setText(preferencias.getString(
+                    "profesor_" + nombreActual, ""
+            ));
+
+            LinearLayout contenedor = new LinearLayout(context);
+            contenedor.setOrientation(LinearLayout.VERTICAL);
+            contenedor.setPadding(50, 20, 50, 10);
+
+            contenedor.addView(inputNombre);
+            contenedor.addView(inputProfesor);
+
+            new AlertDialog.Builder(context)
+                    .setTitle("Editar asignatura")
+                    .setView(contenedor)
+                    .setNegativeButton("Cancelar", null)
+                    .setPositiveButton("Guardar cambios", (dialog, which) -> {
+
+                        String nuevoNombre = inputNombre.getText().toString().trim();
+                        String nuevoProfesor = inputProfesor.getText().toString().trim();
+
+                        if (!nuevoNombre.isEmpty()) {
+
+                            preferencias.edit()
+                                    .remove("profesor_" + nombreActual)
+                                    .putString("profesor_" + nuevoNombre, nuevoProfesor)
+                                    .apply();
+
+                            listaAsignaturas.set(posicion, nuevoNombre);
+
+                            alEliminarAsignatura.run();
+                            notifyItemChanged(posicion);
+                        }
+                    })
+                    .show();
+        });
         String nombreAsignatura = listaAsignaturas.get(position);
 
         String profesor = preferencias.getString(
@@ -52,38 +106,7 @@ public class AsignaturasAdapter extends RecyclerView.Adapter<AsignaturasAdapter.
         } else {
             holder.textViewDescripcionAsignatura.setText("Profesor: " + profesor);
         }
-        holder.textViewDescripcionAsignatura.setOnClickListener(v -> {
 
-            EditText inputProfesor = new EditText(context);
-            inputProfesor.setSingleLine(true);
-            inputProfesor.setHint("Nombre del profesor");
-            inputProfesor.setText(preferencias.getString(
-                    "profesor_" + nombreAsignatura, ""
-            ));
-
-            new AlertDialog.Builder(context)
-                    .setTitle("Asignar profesor")
-                    .setView(inputProfesor)
-                    .setNegativeButton("Cancelar", null)
-                    .setPositiveButton("Guardar", (dialog, which) -> {
-
-                        String nuevoProfesor = inputProfesor.getText()
-                                .toString().trim();
-
-                        preferencias.edit()
-                                .putString("profesor_" + nombreAsignatura, nuevoProfesor)
-                                .apply();
-
-                        if (nuevoProfesor.isEmpty()) {
-                            holder.textViewDescripcionAsignatura
-                                    .setText("Profesor: Sin asignar");
-                        } else {
-                            holder.textViewDescripcionAsignatura
-                                    .setText("Profesor: " + nuevoProfesor);
-                        }
-                    })
-                    .show();
-        });
         holder.btnEliminarAsignatura.setOnClickListener(v -> {
             int posicion = holder.getBindingAdapterPosition();
             if (posicion != RecyclerView.NO_POSITION) {
