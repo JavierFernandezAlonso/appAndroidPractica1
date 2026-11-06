@@ -13,6 +13,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AlertDialog;
 import android.widget.EditText;
 import android.content.SharedPreferences;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +31,7 @@ public class AsignaturasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_asignaturas);
         preferencias = getSharedPreferences("StudyPlan", MODE_PRIVATE);
         btnAnadirAsignatura = findViewById(R.id.btnAñadirAsignaturas);
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
         recyclerViewAsignaturas = findViewById(R.id.recyclerViewAsignaturas);
         recyclerViewAsignaturas.setLayoutManager(new LinearLayoutManager(this));
         listaAsignaturas = new ArrayList<>();
@@ -41,11 +43,21 @@ public class AsignaturasActivity extends AppCompatActivity {
         AsignaturasAdapter adapter = new AsignaturasAdapter(listaAsignaturas, () -> guardarAsignaturas());
         recyclerViewAsignaturas.setAdapter(adapter);
         btnAnadirAsignatura.setOnClickListener(v -> {
+            LinearLayout contenedor = new LinearLayout(this);
+            contenedor.setOrientation(LinearLayout.VERTICAL);
+            contenedor.setPadding(50, 20, 50, 10);
+
             EditText inputAsignatura = new EditText(this);
             inputAsignatura.setHint("Nombre de la asignatura");
+
+            EditText inputProfesor = new EditText(this);
+            inputProfesor.setHint("Nombre del profesor");
+
+            contenedor.addView(inputAsignatura);
+            contenedor.addView(inputProfesor);
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Nueva asignatura");
-            builder.setView(inputAsignatura);
+            builder.setView(contenedor);
             builder.setNegativeButton("Cancelar", (dialog, which) -> {
                 dialog.dismiss();
             });
@@ -53,8 +65,17 @@ public class AsignaturasActivity extends AppCompatActivity {
             builder.setPositiveButton("Añadir", (dialog, which) -> {
                 String nombre = inputAsignatura.getText().toString().trim();
                 if (!nombre.isEmpty()) {
+
+                    String profesor = inputProfesor.getText().toString().trim();
+
                     listaAsignaturas.add(nombre);
+
+                    preferencias.edit()
+                            .putString("profesor_" + nombre, profesor)
+                            .apply();
+
                     adapter.notifyItemInserted(listaAsignaturas.size() - 1);
+
                     guardarAsignaturas();
                 }
             });
